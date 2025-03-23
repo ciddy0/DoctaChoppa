@@ -3,12 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Response</title>
+    <title>Choppers Report</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap');
+
+        * {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        body {
+            font-family: 'Pixelify Sans', sans-serif;
+        }
+        .chopper-container {
+            position: fixed;
+            top: 150px;  /* Distance from bottom */
+            right: 156px;   /* Distance from right */
+            opacity: 0.3;  /* Adjust opacity */
+            z-index: 1;    /* Behind the response container */
+        }
+        .response-container{
+        display: flex;
+        justify-content: center;
+        top: 10px;
+        align-items: center;
+        height: calc(100% - 30px);
+        }
+        .response-container{
+            overflow-y: scroll;
+        }
+        #back-btn {
+        width: 95px;
+        height: 54px;
+        border: none;
+        bottom: 0px;
+        background-color: #F96060; /* Gray background */
+        color: white;
+        cursor: pointer;
+        border-radius: 20px;
+        justify-content: center;
+    }
+
+    </style>
 </head>
 <body>
-    <h2>Medication and Allergy Check</h2>
-    <div id="responseText">Loading...</div>
-
+    <div class="response-container">
+        <br>
+        <div id="responseText">Loading...</div>
+    </div>
+    <div class="chopper-container">
+        <img src="assets/images/chopper.png">
+    </div>
+    <button id="back-btn" onclick="back()">back</button>
     <script src="renderer.js"></script>
+    <script>
+        function back() {
+            window.location.href = 'meds.html'; 
+        }
+    </script>
 </body>
 </html>

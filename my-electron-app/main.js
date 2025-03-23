@@ -82,9 +82,10 @@ ipcMain.on('submit-medication-alt', async (event, data) => {
         User Details: Name: ${userData.name}, Age: ${userData.age}, Gender: ${userData.gender}.
         Medication: ${medicationData.medication}.
         Allergies: ${medicationData.allergies}.
-        Please give me recommendations for cheaper options that have the same active ingredientslike generic brands for these medications
-        No need to include a whole analysis just do a simple and short report and pretend your the doctor.
-    `;
+        Please give me recommendations for cheaper medication ${medicationData.medication} options that have the same active ingredientslike generic brands for these medications.
+        Dont make me reply back. Give me your best educational recommendations and provide names. 
+        Keep it simple.
+        `;
 
     try {
         // Request content from Gemini

@@ -44,3 +44,15 @@ ipcRenderer.on('gemini-response', (event, responseText) => {
         responseDiv.innerText = responseText;
     }
 });
+
+function submitAltData() {
+    // const medication = document.getElementById("medication").value;
+    // const allergies = document.getElementById("allergies").value;
+
+   
+    // const { ipcRenderer } = require('electron');
+    // ipcRenderer.send('submit-medication-alt', { medication, allergies });
+
+    // After submission, you can redirect to the next screen or show a confirmation
+    window.location.href = 'meds.html'; // Or another page as needed
+}
