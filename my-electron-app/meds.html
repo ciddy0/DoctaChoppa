@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medications and Allergies</title>
+</head>
+<body>
+    <h2>Enter Your Medications and Allergies</h2>
+
+    <label for="medication">Medication:</label>
+    <input type="text" id="medication" placeholder="Enter your medication"><br><br>
+
+    <label for="allergies">Allergies:</label>
+    <input type="text" id="allergies" placeholder="Enter your allergies"><br><br>
+
+    <button onclick="submitMedData()">Submit</button>
+
+    <script>
+        function submitMedData() {
+            const medication = document.getElementById("medication").value;
+            const allergies = document.getElementById("allergies").value;
+
+            // Send medication and allergy data to the main process
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.send('submit-medication-allergies', { medication, allergies });
+
+            // After submission, you can redirect to the next screen or show a confirmation
+            window.location.href = 'report.html'; // Or another page as needed
+        }
+    </script>
+</body>
+</html>

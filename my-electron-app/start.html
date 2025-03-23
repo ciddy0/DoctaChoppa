@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info Form</title>
+</head>
+<body>
+    <h2>Enter Your Details</h2>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name"><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" placeholder="Enter your age"><br><br>
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter your weight"><br><br>
+
+    <h3>Select Your Gender:</h3>
+    <button class="gender-btn" id="male-btn" onclick="selectGender('Male')">
+        <img src="male.svg" alt="Male" class="gender-img">
+    </button>
+
+    <button class="gender-btn" id="female-btn" onclick="selectGender('Female')">
+        <img src="female.svg" alt="Female" class="gender-img">
+    </button>
+
+    <br><br>
+    <button onclick="submitData()">Submit</button>
+
+    <script>
+        let selectedGender = "";
+        
+        function selectGender(gender) {
+            selectedGender = gender;
+            document.getElementById("male-btn").classList.remove("selected");
+            document.getElementById("female-btn").classList.remove("selected");
+
+            if (gender === "Male") {
+                document.getElementById("male-btn").classList.add("selected");
+            } else {
+                document.getElementById("female-btn").classList.add("selected");
+            }
+        }
+
+        function submitData() {
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const weight = document.getElementById("weight").value;
+
+            const userData = {
+                name,
+                age,
+                weight,
+                gender: selectedGender
+            };
+
+            // Send data to the main process via IPC
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.send('submit-user-data', userData);
+
+            // Redirect to meds.html after submitting data
+            window.location.href = 'meds.html';
+        }
+    </script>
+</body>
+</html>
