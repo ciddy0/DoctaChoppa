@@ -4,43 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Info Form</title>
+    <style>
+     @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap');
+
+    * {
+        font-family: 'Pixelify Sans', sans-serif;
+    }
+
+    body {
+        font-family: 'Pixelify Sans', sans-serif;
+    }
+    .gender-btn {
+        width: 59px;
+        height: 38px;
+        border: none;
+        background-color: #CCC9C9; /* Gray background */
+        cursor: pointer;
+        border-radius: 20px; /* Optional: Rounded corners */
+    }
+
+    .gender-img {
+        width: 80%;  /* Adjust as needed */
+        height: auto;
+        max-height: 90%;
+    }
+    #name {
+        width: 142px;
+        height: 38px;
+        background-color: #CCC9C9; /* Gray background */
+        color: black; /* White text for better visibility */
+        border: none;
+        padding: 5px; /* Add some padding to prevent text from being cut off */
+        font-size: 10px; /* Adjust font size to fit */
+        text-align: center;
+        border-radius: 20px;
+    }
+    #age {
+        width: 83px;
+        height: 38px;
+        background-color: #CCC9C9; /* Gray background */
+        color: black; /* White text for better visibility */
+        border: none;
+        padding: 5px; /* Add some padding to prevent text from being cut off */
+        font-size: 10px; /* Adjust font size to fit */
+        text-align: center;
+        border-radius: 20px;
+        justify-content: center;
+    }
+    #weight {
+        width: 101px;
+        height: 38px;
+        background-color: #CCC9C9; /* Gray background */
+        color: black; /* White text for better visibility */
+        border: none;
+        padding: 5px; /* Add some padding to prevent text from being cut off */
+        font-size: 10px; /* Adjust font size to fit */
+        text-align: center;
+        border-radius: 20px;
+    }
+    .user-data {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 29px; 
+    }
+    .submit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust spacing from inputs */
+    }
+
+    .submit-btn {
+        width: 95px;
+        height: 54px;
+        border: none;
+        background-color: #F96060; /* Gray background */
+        color: white;
+        cursor: pointer;
+        border-radius: 20px;
+        justify-content: center;
+    }
+    .chopper-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 21px;
+    }
+    .overlay {
+    position: fixed;  /* Stays in place even when scrolling */
+    bottom: 174px;
+    right: 52px;
+    /* Optional: Adds a dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Ensures clicks go through the image */
+    }
+
+    .overlay img {
+        width: 80%; /* Adjust as needed */
+        max-width: 500px; /* Set a max size */
+    }
+    .overlay-text {
+    position: fixed;  /* Stays in place even when scrolling */
+    bottom: 228px;
+    right: 83px;
+    /* Optional: Adds a dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px; /* 93.333% *//* Ensures clicks go through the image */
+    }
+    </style>
 </head>
 <body>
-    <h2>Enter Your Details</h2>
+    <div class="user-data">
+        <button class="gender-btn" id="gender-btn" onclick="toggleGender()">
+            <img id="gender-icon" src="assets/svgs/male.svg" alt="Male" class="gender-img">
+        </button>
+        <input type="text" id="name" placeholder="enter name">
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="Enter your name"><br><br>
+        <input type="number" id="age" placeholder="age">
 
-    <label for="age">Age:</label>
-    <input type="number" id="age" placeholder="Enter your age"><br><br>
-
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" placeholder="Enter your weight"><br><br>
-
-    <h3>Select Your Gender:</h3>
-    <button class="gender-btn" id="male-btn" onclick="selectGender('Male')">
-        <img src="male.svg" alt="Male" class="gender-img">
-    </button>
-
-    <button class="gender-btn" id="female-btn" onclick="selectGender('Female')">
-        <img src="female.svg" alt="Female" class="gender-img">
-    </button>
-
-    <br><br>
-    <button onclick="submitData()">Submit</button>
+        <input type="number" id="weight" placeholder="110lbs">
+    </div>
+    <div class="submit-container">
+        <button class="submit-btn" onclick="submitData()">Submit</button>
+    </div>
+    <div class="chopper-container">
+        <img src="assets/images/chopper.png">
+    </div>
+    <div class="overlay">
+        <img src="assets/svgs/chatbox.svg" alt="Overlay Image">
+    </div>
+    <div class = "overlay-text">
+        <p>My name is <br> Dr. Chopper </p>
+    </div>
+   
+    
+    
 
     <script>
-        let selectedGender = "";
-        
-        function selectGender(gender) {
-            selectedGender = gender;
-            document.getElementById("male-btn").classList.remove("selected");
-            document.getElementById("female-btn").classList.remove("selected");
+        let selectedGender = "Male"; // Default gender
 
-            if (gender === "Male") {
-                document.getElementById("male-btn").classList.add("selected");
+        function toggleGender() {
+            const genderIcon = document.getElementById("gender-icon");
+            const genderText = document.getElementById("gender-text");
+
+            // Toggle gender
+            if (selectedGender === "Male") {
+                selectedGender = "Female";
+                genderIcon.src = "assets/svgs/female.svg"; // Change the icon to female
+                genderText.textContent = "Female"; // Update the text to Female
             } else {
-                document.getElementById("female-btn").classList.add("selected");
+                selectedGender = "Male";
+                genderIcon.src = "assets/svgs/male.svg"; // Change the icon to male
+                genderText.textContent = "Male"; // Update the text to Male
             }
         }
 
@@ -56,11 +182,11 @@
                 gender: selectedGender
             };
 
-            // Send data to the main process via IPC
+            // Send data to the main process via IPC (This assumes you're in Electron)
             const { ipcRenderer } = require('electron');
             ipcRenderer.send('submit-user-data', userData);
 
-            // Redirect to meds.html after submitting data
+            // Redirect to next page after submitting data
             window.location.href = 'meds.html';
         }
     </script>

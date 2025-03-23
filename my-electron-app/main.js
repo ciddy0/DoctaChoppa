@@ -19,6 +19,8 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 600,
         height: 400,
+        resizable: false, // Prevent resizing
+        fullscreenable: false, // Prevent fullscreen mode
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -49,7 +51,7 @@ ipcMain.on('submit-medication-allergies', async (event, data) => {
         Medication: ${medicationData.medication}.
         Allergies: ${medicationData.allergies}.
         Please check if there are any conflicts between these medications and allergies and check for drug interaction risks.
-        No need to include a whole analysis just do a simple and short report.
+        No need to include a whole analysis just do a simple and short report and pretend your the doctor.
     `;
 
     try {
