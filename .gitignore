@@ -1,0 +1,33 @@
+# Node.js dependencies
+/node_modules/
+
+# Electron build files
+/dist/
+/out/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local environment files
+.env
+
+# IDE or editor-specific files
+.vscode/
+.idea/
+
+# NPM logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional: If you use the Electron build tools
+.sass-cache/
+/coverage/
+
+# Electron packaging and bundling output (if you’re building your app)
+**/electron-packager/
+**/electron-builder/
