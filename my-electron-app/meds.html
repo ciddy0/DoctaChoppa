@@ -5,17 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medications and Allergies</title>
 </head>
+<style>
+     @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap');
+
+    * {
+        font-family: 'Pixelify Sans', sans-serif;
+        font-weight: bold;
+    }
+
+    body {
+        font-family: 'Pixelify Sans', sans-serif;
+    }
+    .prompt-data {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 29px; 
+    }
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 29px;
+        padding-top: 10px; 
+    }
+    #medication {
+        width: 176px;
+        height: 64px;
+        background-color: #CCC9C9; /* Gray background */
+        color: black; /* White text for better visibility */
+        border: none;
+        padding: 5px; /* Add some padding to prevent text from being cut off */
+        font-size: 10px; /* Adjust font size to fit */
+        text-align: center;
+        border-radius: 20px;
+    }
+    #allergies {
+        width: 160px;
+        height: 64px;
+        background-color: #CCC9C9; /* Gray background */
+        color: black; /* White text for better visibility */
+        border: none;
+        padding: 5px; /* Add some padding to prevent text from being cut off */
+        font-size: 10px; /* Adjust font size to fit */
+        text-align: center;
+        border-radius: 20px;
+        justify-content: center;
+    }
+    #alt, #risk{
+        width: 168px;
+        height: 54px;
+        border: none;
+        background-color: #F96060; /* Gray background */
+        color: white;
+        cursor: pointer;
+        border-radius: 20px;
+        justify-content: center;
+    }
+    .chopper-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+    }
+</style>
 <body>
-    <h2>Enter Your Medications and Allergies</h2>
 
-    <label for="medication">Medication:</label>
-    <input type="text" id="medication" placeholder="Enter your medication"><br><br>
-
-    <label for="allergies">Allergies:</label>
-    <input type="text" id="allergies" placeholder="Enter your allergies"><br><br>
-
-    <button onclick="submitMedData()">Submit</button>
-
+    <div class="prompt-data">
+        <input type="text" id="medication" placeholder="enter medication"><br><br>
+        <input type="text" id="allergies" placeholder="enter allergies"><br><br>
+    </div>
+    
+    <div class="button-container">
+        <button id="risk" onclick="submitMedData()">Check Risk</button>
+        <button id ="alt" onclick="submitAltData()">Alertnatives</button>
+    </div>
+    <div class="chopper-container">
+        <img src="assets/images/chopper.png">
+    </div>
+    
     <script>
         function submitMedData() {
             const medication = document.getElementById("medication").value;
@@ -24,6 +92,17 @@
             // Send medication and allergy data to the main process
             const { ipcRenderer } = require('electron');
             ipcRenderer.send('submit-medication-allergies', { medication, allergies });
+
+            // After submission, you can redirect to the next screen or show a confirmation
+            window.location.href = 'report.html'; // Or another page as needed
+        }
+        function submitAltData() {
+            const medication = document.getElementById("medication").value;
+            const allergies = document.getElementById("allergies").value;
+
+            // Send medication and allergy data to the main process
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.send('submit-medication-alt', { medication, allergies });
 
             // After submission, you can redirect to the next screen or show a confirmation
             window.location.href = 'report.html'; // Or another page as needed

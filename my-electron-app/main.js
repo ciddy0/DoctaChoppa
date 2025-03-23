@@ -69,6 +69,38 @@ ipcMain.on('submit-medication-allergies', async (event, data) => {
         event.sender.send('gemini-response', { error: 'Error checking for conflicts.' });
     }
 });
+ipcMain.on('submit-medication-alt', async (event, data) => {
+    medicationData = data;  // Store the medication data
+    console.log('Medication Data:', medicationData);
+
+    // Combine both sets of data
+    const combinedData = { ...userData, ...medicationData };
+    console.log('Combined Data:', combinedData);
+
+    // Construct a prompt for Gemini to check for medication/allergy conflicts
+    const prompt = `
+        User Details: Name: ${userData.name}, Age: ${userData.age}, Gender: ${userData.gender}.
+        Medication: ${medicationData.medication}.
+        Allergies: ${medicationData.allergies}.
+        Please give me recommendations for cheaper options that have the same active ingredientslike generic brands for these medications
+        No need to include a whole analysis just do a simple and short report and pretend your the doctor.
+    `;
+
+    try {
+        // Request content from Gemini
+        console.log(prompt)
+        const result = await model.generateContent(prompt);
+
+        // Extract the response text (ensure to call the text() function to get the string content)
+        const responseText = result.response.text();
+        console.log(responseText)
+        // Now send the response text back to the renderer process
+        event.sender.send('gemini-response', responseText);
+    } catch (error) {
+        console.error('Error generating content from Gemini API:', error);
+        event.sender.send('gemini-response', { error: 'Error checking for conflicts.' });
+    }
+});
 
 app.whenReady().then(() => {
     createWindow();
