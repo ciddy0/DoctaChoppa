@@ -30,7 +30,7 @@ An intelligent desktop application that helps users review their medications and
 1. Clone the repo:
    ```bash
    git clone https://github.com/yourusername/medcheck-ai.git
-   cd medcheck-ai```
+   cd medcheck-ai
 3. Install dependecies
     ```bash
     npm install
