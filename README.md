@@ -29,7 +29,7 @@ An intelligent desktop application that helps users review their medications and
 ## Setup
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/medcheck-ai.git
+   git clone https://github.com/ciddy0/DoctaChoppa.git
    cd medcheck-ai
 3. Install dependecies
     ```bash
